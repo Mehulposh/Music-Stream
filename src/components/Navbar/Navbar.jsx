@@ -1,5 +1,5 @@
 import { searchSOng } from "../../api/api"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export  const NavBar = ({setData}) => {
     const [query, setQuery] = useState('');
