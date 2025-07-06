@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import {NavBar} from './components/Navbar/Navbar';
 import { getTracks } from './api/api'
+import { PLayer } from './components/Player/Player';
+import { SongCard } from './components/SongCard/SongCard';
 
 function App() {
   const [data, setData] = useState([]);
@@ -40,32 +42,14 @@ function App() {
       {
         displayedSongs.length > 0 ? (
           displayedSongs.map(item => (
-          <div 
-            key={item["id"]} 
-            onClick={() => setCurrSong({
-              'title': item['album_name'],
-              'src': item.audio,
-            })}
-            className= {`w-[190px] ${currSong.src === item.audio ? " p-2 rounded bg-orange-300" : ""}`}
-          >
-            <img src={item['album_image']} className='rounded-xl size-50 mb-2'/>
-            <h3 className='mb-2' >{item["album_name"]}</h3>
-            <h2>{item['artist_name']}</h2>
-          </div>
+          <SongCard item={item} currSong={currSong} setCurrSong={setCurrSong}/>
         ))) : (
           null
         )
       }
       </div>
 
-      <div className="fixed bottom-5 w-[90%] rounded left-20 bg-black/70 p-4 z-50">
-        <p 
-          className="text-white text-center font-bold text-xl mb-2"
-        >
-          {currSong.title}
-        </p>
-        <audio src={currSong.src} controls autoPlay className="w-full" />
-      </div>
+      <PLayer currSong={currSong} />
     </div>
   )
 
